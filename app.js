@@ -40,6 +40,8 @@ function addTask(event){
     //add li item to ul
     const ul = document.querySelector(".collection");
     ul.appendChild(li);
+    //rea tühjaks tegemine peale taski lisamist
+    taskInput.value = "";
 
     event.preventDefault();
 
