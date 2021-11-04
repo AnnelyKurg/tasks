@@ -25,7 +25,7 @@ function deleteTask(event) {
     }
 }
 
-function addTask(event){
+function addTask(event) {
     //event = e Ei pea pikalt välja kirjutama
     const taskInput = document.querySelector("#task");
     let task = taskInput.value;
@@ -50,10 +50,29 @@ function addTask(event){
     //add li item to ul
     const ul = document.querySelector(".collection");
     ul.appendChild(li);
+    //save task
+
+
+    addTaskToLocalStorage(task);
+
     //rea tühjaks tegemine peale taski lisamist
     taskInput.value = "";
 
     event.preventDefault();
+}
+
+function addTaskToLocalStorage(task) {
+       //salvesta taskid
+    let tasks;
+    if(localStorage.getItem("tasks") === null){
+        tasks = [];
+    } else {
+        tasks = JSON.parse(localStorage.getItem("tasks"));
+    }
+    console.log(tasks);
+    tasks.push(task);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    console.log(tasks);
 
 }
 
