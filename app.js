@@ -8,6 +8,39 @@ const deleteTasksBtn = document.querySelector("#delete-tasks");
 form.addEventListener("submit", addTask);
 taskList.addEventListener("click", deleteTask);
 deleteTasksBtn.addEventListener("click", deleteTasks);
+document.addEventListener("DOMDocumentLoaded", getTasksfromLocalStorage);
+
+function getTasksfromLocalStorage() {
+    let tasks;
+    if(localStorage.getItem("tasks") === null){
+        tasks = [];
+    } else {
+        tasks = JSON.parse(localStorage.getItem("tasks"));
+    }
+    tasks.forEach(function (tasksElemet) {
+             //create li element
+            const li = document.createElement("li");
+            //add scc class
+            li.className = "collection-item";
+            //create txt element
+            const text = document.createTextNode(tasksElemet);
+            //add txt to li item
+            li.appendChild(text);
+            //create a element
+            const link = document.createElement("a");
+            //add css class
+            link.className = "secondary-content";
+            //set href atribute to a
+            link.setAttribute("href", "#");
+            //add text content to a
+            link.appendChild(document.createTextNode("X"));
+            //add a to li
+            li.appendChild(link);
+            //add li item to ul
+            const ul = document.querySelector(".collection");
+            ul.appendChild(li);
+    });
+}
 
 function deleteTasks() {
     //event.target.previousElementSibling.innerHTML = "";
