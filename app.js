@@ -5,25 +5,25 @@ const deleteTasksBtn = document.querySelector("#delete-tasks");
 
 //events
 // selectors ei ole vaja kirjutada. Sulud, jutumärk FORM ja tuleb selectors automaatselt.
-form.addEventListener("submit", addTask);
-taskList.addEventListener("click", deleteTask);
-deleteTasksBtn.addEventListener("click", deleteTasks);
-document.addEventListener("DOMDocumentLoaded", getTasksfromLocalStorage);
+form.addEventListener('submit', addTask);
+taskList.addEventListener('click', deleteTask);
+deleteTasksBtn.addEventListener('click', deleteTasks);
+document.addEventListener('DOMContentLoaded', getTasksFromLocalStorage);
 
-function getTasksfromLocalStorage() {
+function getTasksFromLocalStorage() {
     let tasks;
     if(localStorage.getItem("tasks") === null){
         tasks = [];
     } else {
         tasks = JSON.parse(localStorage.getItem("tasks"));
     }
-    tasks.forEach(function (tasksElemet) {
+    tasks.forEach(function (tasksElement) {
              //create li element
             const li = document.createElement("li");
             //add scc class
             li.className = "collection-item";
             //create txt element
-            const text = document.createTextNode(tasksElemet);
+            const text = document.createTextNode(tasksElement);
             //add txt to li item
             li.appendChild(text);
             //create a element
@@ -115,12 +115,9 @@ function addTask(event) {
     ul.appendChild(li);
     //save task
 
-
     addTaskToLocalStorage(task);
-
     //rea tühjaks tegemine peale taski lisamist
     taskInput.value = "";
-
     event.preventDefault();
 }
 
@@ -132,11 +129,8 @@ function addTaskToLocalStorage(task) {
     } else {
         tasks = JSON.parse(localStorage.getItem("tasks"));
     }
-
     tasks.push(task);
     localStorage.setItem("tasks", JSON.stringify(tasks));
-
-
 }
 
 //console.log(form)
